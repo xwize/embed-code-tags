@@ -30,6 +30,15 @@ TITLE: "Some title"
 ```
 ````
 
+### Vault File with Tags:
+```embed-cpp
+PATH: "vault://Code/main.cpp"
+TAGS: ['+crazyHardFunction!', '-crazyHardFunction!'] 
+TITLE: "Some title"
+TRIM: 1
+```
+where `TAGS` is an array of searchable line tags to determine snippet range
+
 #### Remote File:
 
 ````yaml
