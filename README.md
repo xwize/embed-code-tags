@@ -20,6 +20,18 @@ TITLE: "<some-title>"
 
 Examples:
 
+### Vault File with Tags:
+````yaml
+```embed-cpp
+PATH: "vault://Code/main.cpp"
+TAGS: ['+crazyHardFunction!', '-crazyHardFunction!'] 
+TITLE: "Some title"
+TRIM: 1
+```
+````
+
+where `TAGS` is an array of searchable line tags to determine snippet range. `TRIM` controls whether or not to exclude the tagged lines. 
+
 #### Vault File:
 
 ````yaml
@@ -29,15 +41,6 @@ LINES: "2,9,30-40,100-122,150"
 TITLE: "Some title"
 ```
 ````
-
-### Vault File with Tags:
-```embed-cpp
-PATH: "vault://Code/main.cpp"
-TAGS: ['+crazyHardFunction!', '-crazyHardFunction!'] 
-TITLE: "Some title"
-TRIM: 1
-```
-where `TAGS` is an array of searchable line tags to determine snippet range
 
 #### Remote File:
 
