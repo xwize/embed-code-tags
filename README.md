@@ -2,7 +2,7 @@
 
 This plugin allows to embed code files from Obsidian vault or remote file (eg., GitHub). It works better with live preview feature of Obsidian.
 
-Special thanks to https://github.com/almariah/embed-code-file/commits?author=almariah for original plugin.
+Special thanks to https://github.com/almariah/embed-code-file for original plugin.
 
 ## Settings
 
