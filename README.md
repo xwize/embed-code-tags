@@ -2,6 +2,8 @@
 
 This plugin allows to embed code files from Obsidian vault or remote file (eg., GitHub). It works better with live preview feature of Obsidian.
 
+Special thanks to https://github.com/almariah/embed-code-file/commits?author=almariah for original plugin.
+
 ## Settings
 
 The plugin include multiple language by default (`c,cpp,java,python,go,ruby,javascript,js,typescript,ts,shell,sh,bash`). You can include any needed language to the comma separated list.
@@ -20,7 +22,7 @@ TITLE: "<some-title>"
 
 Examples:
 
-### Vault File with Tags:
+#### Vault File with Tags:
 ````yaml
 ```embed-cpp
 PATH: "vault://Code/main.cpp"
