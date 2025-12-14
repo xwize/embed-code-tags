@@ -1,6 +1,6 @@
 import { Plugin, MarkdownRenderer, TFile, MarkdownPostProcessorContext, MarkdownView, parseYaml, requestUrl} from 'obsidian';
 import { EmbedCodeFileSettings, EmbedCodeFileSettingTab, DEFAULT_SETTINGS} from "./settings";
-import { analyseSrcLines, extractSrcLines} from "./utils";
+import { analyseSrcLines, extractSrcLines, findLineNumber} from "./utils";
 
 export default class EmbedCodeFile extends Plugin {
 	settings: EmbedCodeFileSettings;
@@ -65,7 +65,7 @@ export default class EmbedCodeFile extends Plugin {
 				if (tFile instanceof TFile) {
 					fullSrc = await app.vault.read(tFile)
 				} else {
-					const errMsg = `\`ERROR: could't read file '${srcPath}'\``
+					const errMsg = `\`ERROR: couldn't read file '${srcPath}'\``
 					await MarkdownRenderer.renderMarkdown(errMsg, el, '', this)
 					return
 				}
@@ -79,8 +79,37 @@ export default class EmbedCodeFile extends Plugin {
 			const srcLinesNumString = metaYaml.LINES
 			if (srcLinesNumString) {
 				srcLinesNum = analyseSrcLines(srcLinesNumString)
+			} else {
+				const srcTags = metaYaml.TAGS
+				
+				const startLine = findLineNumber(fullSrc, srcTags[0])
+				const endLine = findLineNumber(fullSrc, srcTags[1])
+				
+				if (startLine <= 0) {
+					const errMsg = `\`ERROR: couldn't find start tag '${srcTags[0]}'\``
+					await MarkdownRenderer.renderMarkdown(errMsg, el, '', this)
+					return
+				}
+				else if (endLine <= 0) {
+					const errMsg = `\`ERROR: couldn't find end tag '${srcTags[1]}'\``
+					await MarkdownRenderer.renderMarkdown(errMsg, el, '', this)
+					return
+				}
+				else {
+					let count = 0
+					for (let i = startLine; i <= endLine; i++) {
+						srcLinesNum[count] = i;
+						count++;
+					}
+				}
 			}
 
+			const lineTrim = metaYaml.TRIM
+			if (lineTrim && srcLinesNum.length >= 2) { 
+				srcLinesNum.shift()
+				srcLinesNum.pop()
+			}
+			
 			if (srcLinesNum.length == 0) {
 				src = fullSrc
 			} else {

@@ -8,7 +8,7 @@ export function pathJoin(dir: string, subpath: string): string {
 
 export function analyseSrcLines(str: string): number[] {
 	str = str.replace(/\s*/g, "")
-	const result: number[] = []
+	let result: number[] = []
 
 	let strs = str.split(",")
 	strs.forEach(it => {
@@ -26,6 +26,21 @@ export function analyseSrcLines(str: string): number[] {
 	})
 
 	return result
+}
+
+export function findLineNumber(fullSrc: string, tag: string): number {
+	// Split the source into lines
+	const fullSrcLines = fullSrc.split('\n');
+
+	// Search for the tag in each line
+	for (let i = 0; i < fullSrcLines.length; i++) {
+		if (fullSrcLines[i].includes(tag)) {
+			// Return 1-based line number
+			return i + 1;
+		}
+	}
+
+	return -1;
 }
 
 export function extractSrcLines(fullSrc: string,  srcLinesNum: number[]): string {
