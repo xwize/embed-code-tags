@@ -123,8 +123,18 @@ export default class EmbedCodeFile extends Plugin {
 
 			let title = metaYaml.TITLE
 
-			if (title !== undefined && title === "") {
-				title = srcPath
+			if (title !== undefined) {
+				let titleFirstLine = ""
+				if (srcLinesNum.length >= 1) {
+					titleFirstLine = srcLinesNum[0].toString()
+				}
+				
+				if (title === "") {
+					title = srcPath
+				} else {					
+					title = title.replace("$path", srcPath)
+					title = title.replace("$line", titleFirstLine)
+				}
 			}
 
 			await MarkdownRenderer.renderMarkdown('```' + lang + '\n' + src + '\n```', el, '', this)
