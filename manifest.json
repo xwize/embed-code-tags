@@ -1,7 +1,7 @@
 {
 	"id": "embed-code-tags",
 	"name": "Embed Code Tags",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"minAppVersion": "0.15.0",
 	"description": "This is a plugin for Obsidian that allows for embedding code files with tags.",
 	"author": "Obsidian",
