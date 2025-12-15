@@ -1,6 +1,8 @@
-# Embed Code File (Obsidian Plugin)
+# Embed Code Tags (Obsidian Plugin)
 
 This plugin allows to embed code files from Obsidian vault or remote file (eg., GitHub). It works better with live preview feature of Obsidian.
+
+Special thanks to https://github.com/almariah/embed-code-file for original plugin.
 
 ## Settings
 
@@ -19,6 +21,18 @@ TITLE: "<some-title>"
 ````
 
 Examples:
+
+#### Vault File with Tags:
+````yaml
+```embed-cpp
+PATH: "vault://Code/main.cpp"
+TAGS: ['+crazyHardFunction!', '-crazyHardFunction!'] 
+TITLE: "Some title"
+TRIM: 1
+```
+````
+
+where `TAGS` is an array of searchable line tags to determine snippet range. `TRIM` controls whether or not to exclude the tagged lines. 
 
 #### Vault File:
 
