@@ -110,10 +110,15 @@ export default class EmbedCodeFile extends Plugin {
 				srcLinesNum.pop()
 			}
 			
+			let ellipses = metaYaml.ELLIPSES
+			if (ellipses == null) {
+				ellipses = '...'
+			}
+
 			if (srcLinesNum.length == 0) {
 				src = fullSrc
 			} else {
-				src = extractSrcLines(fullSrc, srcLinesNum)
+				src = extractSrcLines(fullSrc, srcLinesNum, ellipses)
 			}
 
 			let title = metaYaml.TITLE

@@ -43,7 +43,7 @@ export function findLineNumber(fullSrc: string, tag: string): number {
 	return -1;
 }
 
-export function extractSrcLines(fullSrc: string,  srcLinesNum: number[]): string {
+export function extractSrcLines(fullSrc: string,  srcLinesNum: number[], ellipses : string): string {
     let src = ""
 
     const fullSrcLines = fullSrc.split("\n")
@@ -70,14 +70,14 @@ export function extractSrcLines(fullSrc: string,  srcLinesNum: number[]): string
 			return
 		} 
 
-		if (index == 0 && lineNum != 1) {
-			src = '...' + '\n' + fullSrcLines[lineNum-1]
+		if (index == 0 && lineNum != 1 && ellipses !== "") {
+			src = ellipses + '\n' + fullSrcLines[lineNum-1]
 			return
 		}
 		
 		// zeros is dots (analyseSrcLines)
-        if (lineNum == 0 ) {
-			src = src + '\n' + '...'
+        if (lineNum == 0) {
+			src = src + '\n' + ellipses
 			return
 		}
 
