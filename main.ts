@@ -122,12 +122,16 @@ export default class EmbedCodeFile extends Plugin {
 			}
 
 			let title = metaYaml.TITLE
-			if (!title) {
+
+			if (title != null && title === "") {
 				title = srcPath
 			}
 
 			await MarkdownRenderer.renderMarkdown('```' + lang + '\n' + src + '\n```', el, '', this)
-			this.addTitleLivePreview(el, title);
+
+			if (title != null) {
+				this.addTitleLivePreview(el, title);
+			}
 		});
 	}
 
